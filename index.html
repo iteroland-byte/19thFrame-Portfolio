@@ -702,7 +702,54 @@ footer{
 /* Category color coding */
 .work-card[data-cat="motion"] .work-card-tag-badge{background:rgba(176,38,255,.85)}
 .work-card[data-cat="still"] .work-card-tag-badge{background:rgba(80,20,150,.85)}
+/* Gallery Modal */
 
+.gallery-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+
+    background: rgba(0,0,0,0.92);
+
+    z-index: 9999;
+
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.gallery-modal img {
+    max-width: 85%;
+    max-height: 80vh;
+
+    border-radius: 12px;
+}
+
+#closeGallery {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+
+    color: white;
+    font-size: 42px;
+
+    cursor: pointer;
+}
+
+.gallery-buttons {
+    margin-top: 20px;
+    display: flex;
+    gap: 12px;
+}
+
+.gallery-buttons button {
+    padding: 10px 18px;
+
+    border: none;
+    border-radius: 8px;
+
+    cursor: pointer;
+}
 </style>
 </head>
 <body>
@@ -871,24 +918,49 @@ footer{
     <div class="work-grid" id="workGrid">
 
       <!-- 1: MyGuy Prime flyer -->
-      <div class="work-card large" data-cat="still"
-           data-type="image" data-src="apt_faq1.jpg"
-           data-title="Stay@Margarets — Apartment FAQ Series"
-           data-desc="5-slide Instagram carousel for Stay@Margarets Abuja short-stay apartments — earthy tones, bold typography, organic blob shapes.">
-        <img class="work-media" src="apt_faq1.jpg" alt="MyGuy Prime Flyer" loading="lazy">
-        <div class="work-overlay">
-          <div class="work-tag">Still · Instagram Carousel</div>
-          <div class="work-title">Stay@Margarets</div>
-          <div class="work-desc">5-slide FAQ carousel — Abuja short-stay apartments</div>
+<div class="work-card work-large"
+     data-cat="still"
+
+     data-type="carousel"
+
+     data-images='[
+       "my guy.jpg",
+       "my guy (services).jpg"
+     ]'
+
+     data-title="MyGuy Prime Limited"
+
+     data-desc="Service-focused social media carousel for MyGuy Prime.">
+
+    <!-- Cover image -->
+    <img class="work-media"
+         src="my guy.jpg"
+         alt="MyGuy Prime">
+
+    <div class="work-overlay">
+
+        <div class="work-tag">
+            Still · Instagram Carousel
         </div>
-      </div>
+
+        <div class="work-title">
+            MyGuy Prime Limited
+        </div>
+
+        <div class="work-desc">
+            Service-focused social media carousel for MyGuy Prime.
+        </div>
+
+    </div>
+
+</div>
 
       <!-- 2: Roland's sticker -->
       <div class="work-card" data-cat="still"
-           data-type="image" data-src="ROLAND_S_4.jpg"
+           data-type="image" data-src="ROLAND’S 4.jpg"
            data-title="Roland's — Thank You Sticker"
            data-desc="Item branding design for Roland's bakery. A circular 'Thank You for Your Purchase' sticker with elegant script typography on dark background.">
-        <img class="work-media" src="ROLAND_S_4.jpg" alt="Roland's Sticker" loading="lazy">
+        <img class="work-media" src= "ROLAND’S 4.jpg" alt="Roland's Sticker" loading="lazy">
         <div class="work-overlay">
           <div class="work-tag">Branding · Item Design</div>
           <div class="work-title">Roland's Bakery</div>
@@ -898,10 +970,10 @@ footer{
 
       <!-- 3: DCA Alumni (video) -->
       <div class="work-card" data-cat="motion"
-           data-type="video" data-src="dca_alumni.mp4"
+           data-type="video" data-src="DCA Alumni Spotlight 2 (better quality).mp4"
            data-title="DCA Alumni Spotlight"
            data-desc="Motion graphic alumni spotlight reel featuring kinetic typography and smooth transitions — produced at Dinovate Studios.">
-        <video class="work-media" src="dca_alumni.mp4" muted preload="metadata"></video>
+        <video class="work-media" src="DCA Alumni Spotlight 2 (better quality).mp4" muted preload="metadata"></video>
         <div class="work-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         <div class="work-overlay">
           <div class="work-tag">Motion · Alumni Reel</div>
@@ -912,10 +984,10 @@ footer{
 
       <!-- 4: Jabi School for the Blind -->
       <div class="work-card" data-cat="still"
-           data-type="image" data-src="jabi.jpg"
+           data-type="image" data-src="Jabi School for the Blind_page-0001 (1).jpg"
            data-title="Little Lights Initiatives — Jabi School for the Blind"
            data-desc="NGO outreach flyer for Little Lights Initiatives. Bold typography with a warm human-centered photo composition driving donations and volunteer sign-ups.">
-        <img class="work-media" src="jabi.jpg" alt="Jabi School for the Blind Flyer" loading="lazy">
+        <img class="work-media" src="Jabi School for the Blind_page-0001 (1).jpg"Jabi School for the Blind Flyer" loading="lazy">
         <div class="work-overlay">
           <div class="work-tag">Still · NGO Flyer</div>
           <div class="work-title">Little Lights Initiatives</div>
@@ -925,10 +997,10 @@ footer{
 
       <!-- 5: Promo Ad (video) -->
       <div class="work-card" data-cat="motion"
-           data-type="video" data-src="promo_ad.mp4"
+           data-type="video" data-src="Promo Ad.mp4"
            data-title="Promo Ad"
            data-desc="High-energy promotional advertisement with sharp motion graphics, text overlays, and synced audio — built entirely in motion design.">
-        <video class="work-media" src="promo_ad.mp4" muted preload="metadata"></video>
+        <video class="work-media" src="promo ad.mp4" muted preload="metadata"></video>
         <div class="work-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         <div class="work-overlay">
           <div class="work-tag">Motion · Commercial Reel</div>
@@ -938,24 +1010,51 @@ footer{
       </div>
 
       <!-- 6: Apartment FAQ carousel -->
-      <div class="work-card" data-cat="still"
-           data-type="image" data-src="apt_faq3.jpg"
-           data-title="Stay@Margarets — Apartment FAQ Carousel"
-           data-desc="5-slide Instagram carousel for Stay@Margarets Abuja short-stay apartments. Consistent earthy tones with bold typography and organic blob shapes.">
-        <img class="work-media" src="apt_faq3.jpg" alt="Apartment FAQ Carousel" loading="lazy">
-        <div class="work-overlay">
-          <div class="work-tag">Still · Instagram Carousel</div>
-          <div class="work-title">Stay@Margarets</div>
-          <div class="work-desc">Apartment FAQ — 5-slide carousel series</div>
+      <div class="work-card"
+     data-cat="still"
+     data-type="carousel"
+
+     data-images='[
+       "APARTMENT FAQ_page-0001.jpg",
+       "APARTMENT FAQ_page-0003.jpg",
+       "APARTMENT FAQ2_page-0001.jpg",
+       "APARTMENT FAQ2_page-0002.jpg",
+       "APARTMENT FAQ2_page-0003.jpg"
+     ]'
+
+     data-title="Stay@Margarets — Apartment FAQ Carousel"
+     data-desc="5-slide Instagram carousel">
+
+    <!-- Cover image -->
+    <img class="work-media"
+         src="APARTMENT FAQ_page-0001.jpg"
+         alt="Apartment FAQ Carousel">
+
+    <!-- KEEP THIS -->
+    <div class="work-overlay">
+
+        <div class="work-tag">
+            Still · Instagram Carousel
         </div>
-      </div>
+
+        <div class="work-title">
+            Stay@Margarets
+        </div>
+
+        <div class="work-desc">
+            Apartment FAQ — 5-slide carousel
+        </div>
+
+    </div>
+
+</div>
 
       <!-- 7: Sound Design video -->
       <div class="work-card" data-cat="motion"
-           data-type="video" data-src="sound_design.mp4"
+           data-type="video" data-src="sound design.mp4"
            data-title="Sound Design Motion Piece"
            data-desc="Motion graphic piece with intentional sound design — kinetic typography synced tightly with audio cues for maximum sensory impact.">
-        <video class="work-media" src="sound_design.mp4" muted preload="metadata"></video>
+        <video class="work-media" src="sound design.mp4" muted preload="metadata"></video>
         <div class="work-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         <div class="work-overlay">
           <div class="work-tag">Motion · Sound Design</div>
@@ -966,10 +1065,10 @@ footer{
 
       <!-- 8: EcoSwipe -->
       <div class="work-card" data-cat="still"
-           data-type="image" data-src="ecoswipe.png"
+           data-type="image" data-src="Ecoswipe.png"
            data-title="EcoSwipe — Product Ad"
            data-desc="Clean product advertisement for EcoSwipe water purification. Stark visual contrast between dirty and clean water with powerful headline typography.">
-        <img class="work-media" src="ecoswipe.png" alt="EcoSwipe Ad" loading="lazy">
+        <img class="work-media" src="Ecoswipe.png" alt="EcoSwipe Ad" loading="lazy">
         <div class="work-overlay">
           <div class="work-tag">Still · Product Ad</div>
           <div class="work-title">EcoSwipe</div>
@@ -979,10 +1078,10 @@ footer{
 
       <!-- 9: ABCD kinetic typography -->
       <div class="work-card" data-cat="motion"
-           data-type="video" data-src="abcd.mp4"
+           data-type="video" data-src="ABCD.mp4"
            data-title="ABCD — Kinetic Typography"
            data-desc="Bold kinetic typography animation with high visual energy and micro-adjusted text timing — smooth, punchy, and rhythmically precise.">
-        <video class="work-media" src="abcd.mp4" muted preload="metadata"></video>
+        <video class="work-media" src="ABCD.mp4" muted preload="metadata"></video>
         <div class="work-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         <div class="work-overlay">
           <div class="work-tag">Motion · Kinetic Typography</div>
@@ -993,10 +1092,10 @@ footer{
 
       <!-- 10: Valentine Flyer -->
       <div class="work-card" data-cat="still"
-           data-type="image" data-src="valentine.jpg"
+           data-type="image" data-src="Valentine flyer_page-0001.jpg"
            data-title="Meat & More — Valentine's Day Ad"
            data-desc="Valentine's Day promotional flyer for Meat & More Lagos — bold Pidgin headline with high-contrast meat heart product photography. 50% off deliveries campaign.">
-        <img class="work-media" src="valentine.jpg" alt="Valentine Flyer" loading="lazy">
+        <img class="work-media" src="Valentine flyer_page-0001.jpg" alt="Valentine Flyer" loading="lazy">
         <div class="work-overlay">
           <div class="work-tag">Still · Promotional Flyer</div>
           <div class="work-title">Meat & More</div>
@@ -1006,10 +1105,10 @@ footer{
 
       <!-- 11: Apostolic Church -->
       <div class="work-card" data-cat="motion"
-           data-type="video" data-src="apostolic.mp4"
+           data-type="video" data-src="Apostolic Church.mp4"
            data-title="Apostolic Church Motion Graphic"
            data-desc="Motion graphic piece for Apostolic Church — clean, reverent animation combining bold text reveals with carefully timed transitions.">
-        <video class="work-media" src="apostolic.mp4" muted preload="metadata"></video>
+        <video class="work-media" src="Apostolic Church.mp4" muted preload="metadata"></video>
         <div class="work-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         <div class="work-overlay">
           <div class="work-tag">Motion · Church Graphic</div>
@@ -1020,10 +1119,10 @@ footer{
 
       <!-- 12: Card Affirmations -->
       <div class="work-card" data-cat="still"
-           data-type="image" data-src="card_aff.jpg"
+           data-type="image" data-src="Card affirmations_page-0001.jpg"
            data-title="Little Blossom Cards — Mini Affirmation Set"
            data-desc="Children's affirmation card set for @LittleBlossomCards — playful, colourful layouts with handwritten-style typography designed to inspire and uplift young minds.">
-        <img class="work-media" src="card_aff.jpg" alt="Affirmation Cards" loading="lazy">
+        <img class="work-media" src="Card affirmations_page-0001.jpg" alt="Affirmation Cards" loading="lazy">
         <div class="work-overlay">
           <div class="work-tag">Still · Card Design</div>
           <div class="work-title">Little Blossom Cards</div>
@@ -1033,10 +1132,10 @@ footer{
 
       <!-- 13: ABCD 2 -->
       <div class="work-card" data-cat="motion"
-           data-type="video" data-src="abcd2.mp4"
+           data-type="video" data-src="ABCD 2.mp4"
            data-title="ABCD 2 — Kinetic Typography Vol. 2"
            data-desc="Second instalment of the ABCD kinetic typography series — evolved motion design with more complex layering and sound-synced text bursts.">
-        <video class="work-media" src="abcd2.mp4" muted preload="metadata"></video>
+        <video class="work-media" src="ABCD 2.mp4" muted preload="metadata"></video>
         <div class="work-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         <div class="work-overlay">
           <div class="work-tag">Motion · Kinetic Typography</div>
@@ -1348,6 +1447,7 @@ document.querySelectorAll('.work-card').forEach(card=>{
   card.addEventListener('click',()=>{
     const type=card.dataset.type;
     const src=card.dataset.src;
+    const images=card.dataset.images;
     const title=card.dataset.title;
     const desc=card.dataset.desc;
     lbTitle.textContent=title;
@@ -1355,10 +1455,37 @@ document.querySelectorAll('.work-card').forEach(card=>{
     if(type==='video'){
       lbVideo.style.display='block';lbImg.style.display='none';
       lbVideo.src=src;lbVideo.play();
+   }else{
+    lbImg.style.display='block';
+    lbVideo.style.display='none';
+
+    // If card has multiple images
+    if(images){
+
+        const gallery = JSON.parse(images);
+
+        let current = 0;
+
+        lbImg.src = gallery[current];
+
+        // NEXT IMAGE ON CLICK
+        lbImg.onclick = () => {
+
+            current++;
+
+            if(current >= gallery.length){
+                current = 0;
+            }
+
+            lbImg.src = gallery[current];
+        };
+
     }else{
-      lbImg.style.display='block';lbVideo.style.display='none';
-      lbImg.src=src;
+
+        lbImg.src = src;
+
     }
+}
     lightbox.classList.add('open');
     document.body.style.overflow='hidden';
     // Scale in
@@ -1504,6 +1631,22 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
   });
 })();
 
+
 </script>
+
+<!-- Gallery Modal -->
+<div id="galleryModal" class="gallery-modal">
+
+    <span id="closeGallery">&times;</span>
+
+    <img id="galleryImage" src="" alt="Gallery Image">
+
+    <div class="gallery-buttons">
+        <button id="prevBtn">Prev</button>
+        <button id="nextBtn">Next</button>
+    </div>
+
+</div>
+
 </body>
 </html>
