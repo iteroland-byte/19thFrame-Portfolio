@@ -415,6 +415,60 @@ section{position:relative;z-index:1;padding:100px 0}
   color:#fff;box-shadow:0 0 16px rgba(176,38,255,.4);
 }
 
+/* ══════════════════════════════
+   WORK CATEGORY COVERS
+══════════════════════════════ */
+.work-categories{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+@media(max-width:900px){.work-categories{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.work-categories{grid-template-columns:1fr}}
+
+.category-card{
+  position:relative;border-radius:16px;overflow:hidden;
+  background:var(--card-bg);border:1px solid var(--border);
+  cursor:pointer;aspect-ratio:4/3;
+  transition:transform .4s ease,box-shadow .4s ease,border-color .4s ease;
+}
+.category-card:hover{
+  transform:translateY(-8px) scale(1.02);
+  box-shadow:0 0 40px rgba(176,38,255,.25),0 20px 50px rgba(0,0,0,.5);
+  border-color:rgba(176,38,255,.5);
+}
+.category-cover{
+  width:100%;height:100%;object-fit:cover;display:block;
+  background:#0a0a0a;
+  transition:transform .5s ease;
+}
+.category-card:hover .category-cover{transform:scale(1.06)}
+.category-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(0deg,rgba(5,5,5,.9) 0%,rgba(5,5,5,.25) 55%,rgba(5,5,5,.15) 100%);
+  display:flex;align-items:flex-end;justify-content:center;
+  padding:24px;
+}
+.category-title{
+  font-size:1.1rem;font-weight:800;color:#fff;text-align:center;
+  letter-spacing:.5px;
+  text-shadow:0 0 20px rgba(176,38,255,.6);
+}
+
+.work-back-bar{
+  display:none;
+  align-items:center;gap:20px;flex-wrap:wrap;
+  margin-bottom:32px;
+}
+.work-back-bar.visible{display:flex}
+.back-btn{padding:10px 24px;font-size:.78rem}
+.work-category-heading{
+  font-size:1.1rem;font-weight:800;color:#fff;
+}
+
+#workGrid{display:none}
+#workGrid.visible{display:grid}
+
 .work-grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
@@ -851,7 +905,7 @@ footer{
         <p>I bring fresh ideas, fast learning, and a <strong>sharp eye for detail</strong> to every project — from still graphics to kinetic typography to full motion reels.</p>
         <div class="about-stats">
           <div class="stat-card">
-            <div class="stat-num">4+</div>
+            <div class="stat-num">6+</div>
             <div class="stat-lbl">Brands worked with</div>
           </div>
           <div class="stat-card">
@@ -864,7 +918,7 @@ footer{
           </div>
           <div class="stat-card">
             <div class="stat-num">∞</div>
-            <div class="stat-lbl">Ideas in the tank</div>
+            <div class="stat-lbl">Ideas to bring to life</div>
           </div>
         </div>
       </div>
@@ -875,12 +929,17 @@ footer{
             <div class="exp-role">Creative Assistant</div>
             <div class="exp-company">Dinovate Studios</div>
             <div class="exp-period">April 2025 – Present · Abuja, Nigeria</div>
-            <div class="exp-orgs">Worked with: OXFAM · Gates Foundation · ECOWAS · NAFDAC · and more</div>
+            <div class="exp-orgs">Worked with: OXFAM · Gates Foundation · ECOWAS · NAFDAC · UNDP · TechHer · Leading Ladies Africa · SAO Group </div>
           </div>
           <div class="exp-item">
             <div class="exp-role">Copywriter & Graphic Designer</div>
             <div class="exp-company">MeatnMore</div>
             <div class="exp-period">2024 – Present · Lagos, Nigeria</div>
+          </div>
+            <div class="exp-item">
+            <div class="exp-role">Video Editor & Graphic Designer</div>
+            <div class="exp-company">Freelance</div>
+            <div class="exp-period">2024 – Present · Remote</div>
           </div>
           <div class="exp-item">
             <div class="exp-role">Production Intern</div>
@@ -910,224 +969,337 @@ footer{
       <div class="section-title">The Work.</div>
       <div class="section-sub">From still graphics to full motion — every frame is intentional.</div>
     </div>
-    <div class="filter-bar reveal">
-      <button class="filter-btn active" data-filter="all">All</button>
-      <button class="filter-btn" data-filter="still">Still Graphics</button>
-      <button class="filter-btn" data-filter="motion">Motion</button>
+    <div class="work-categories reveal" id="workCategories">
+      <div class="category-card" data-category="edited-videos">
+        <img class="category-cover" src="The Apostolic Church.jpg" alt="Edited Videos" loading="lazy">
+        <div class="category-overlay">
+          <div class="category-title">Edited Videos</div>
+        </div>
+      </div>
+      <div class="category-card" data-category="dinovate">
+        <img class="category-cover" src="built by dinovate.jpg" alt="Dinovate Studios" loading="lazy">
+        <div class="category-overlay">
+          <div class="category-title">Dinovate Studios</div>
+        </div>
+      </div>
+      <div class="category-card" data-category="meatmore">
+        <img class="category-cover" src="Valentine flyer_page-0001.jpg" alt="Meat & More NG" loading="lazy">
+        <div class="category-overlay">
+          <div class="category-title">Meat &amp; More NG</div>
+        </div>
+      </div>
+      <div class="category-card" data-category="lagos">
+        <img class="category-cover" src="book cover 2 (1).jpg" alt="Lagos State Government" loading="lazy">
+        <div class="category-overlay">
+          <div class="category-title">Lagos State Government</div>
+        </div>
+      </div>
+      <div class="category-card" data-category="logos">
+        <img class="category-cover" src="Ofada space 1.png" alt="Logos" loading="lazy">
+        <div class="category-overlay">
+          <div class="category-title">Logos</div>
+        </div>
+      </div>
+      <div class="category-card" data-category="others">
+        <img class="category-cover" src="Little Lights Initiative.jpg" alt="Others" loading="lazy">
+        <div class="category-overlay">
+          <div class="category-title">Others</div>
+        </div>
+      </div>
     </div>
+
+    <div class="work-back-bar" id="workBackBar">
+      <button class="btn btn-outline back-btn" id="workBackBtn">← Back to Categories</button>
+      <div class="work-category-heading" id="workCategoryHeading"></div>
+    </div>
+
     <div class="work-grid" id="workGrid">
 
-      <!-- 1: MyGuy Prime flyer -->
-<div class="work-card work-large"
-     data-cat="still"
+      <!-- ============ EDITED VIDEOS ============ -->
 
-     data-type="carousel"
-
-     data-images='[
-       "my guy.jpg",
-       "my guy (services).jpg"
-     ]'
-
-     data-title="MyGuy Prime Limited"
-
-     data-desc="Service-focused social media carousel for MyGuy Prime.">
-
-    <!-- Cover image -->
-    <img class="work-media"
-         src="my guy.jpg"
-         alt="MyGuy Prime">
-
-    <div class="work-overlay">
-
-        <div class="work-tag">
-            Still · Instagram Carousel
-        </div>
-
-        <div class="work-title">
-            MyGuy Prime Limited
-        </div>
-
-        <div class="work-desc">
-            Service-focused social media carousel for MyGuy Prime.
-        </div>
-
-    </div>
-
-</div>
-
-      <!-- 2: Roland's sticker -->
-      <div class="work-card" data-cat="still"
-           data-type="image" data-src="ROLAND’S 4.jpg"
-           data-title="Roland's — Thank You Sticker"
-           data-desc="Item branding design for Roland's bakery. A circular 'Thank You for Your Purchase' sticker with elegant script typography on dark background.">
-        <img class="work-media" src= "ROLAND’S 4.jpg" alt="Roland's Sticker" loading="lazy">
-        <div class="work-overlay">
-          <div class="work-tag">Branding · Item Design</div>
-          <div class="work-title">Roland's Bakery</div>
-          <div class="work-desc">Thank You sticker — circular item branding</div>
-        </div>
-      </div>
-
-      <!-- 3: DCA Alumni (video) -->
-      <div class="work-card" data-cat="motion"
-           data-type="video" data-src="Nosa dca spotlight.MP4"
-           data-title="DCA Alumni Spotlight"
-           data-desc="Motion graphic alumni spotlight reel featuring kinetic typography and smooth transitions — produced at Dinovate Studios.">
-        <video class="work-media" src="Nosa dca spotlight.MP4" muted preload="metadata"></video>
+      <div class="work-card" data-cat="edited-videos"
+           data-type="video" data-src="The Apostolic Church.mp4"
+           data-title="Youth Church Conference"
+           data-desc="Edited video coverage of the Youth Church Conference.">
+        <video class="work-media" src="The Apostolic Church.mp4" poster="The Apostolic Church.jpg" muted preload="metadata"></video>
         <div class="work-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         <div class="work-overlay">
-          <div class="work-tag">Motion · Alumni Reel</div>
-          <div class="work-title">DCA Alumni Spotlight</div>
-          <div class="work-desc">Dinovate Studios production</div>
+          <div class="work-tag">Edited Video</div>
+          <div class="work-title">Youth Church Conference</div>
+          <div class="work-desc">Edited video coverage of the Youth Church Conference.</div>
         </div>
       </div>
 
-      <!-- 4: Jabi School for the Blind -->
-      <div class="work-card" data-cat="still"
-           data-type="image" data-src="Jabi School for the Blind_page-0001 (1).jpg"
-           data-title="Little Lights Initiatives — Jabi School for the Blind"
-           data-desc="NGO outreach flyer for Little Lights Initiatives. Bold typography with a warm human-centered photo composition driving donations and volunteer sign-ups.">
-        <img class="work-media" src="Jabi School for the Blind_page-0001 (1).jpg"Jabi School for the Blind Flyer" loading="lazy">
-        <div class="work-overlay">
-          <div class="work-tag">Still · NGO Flyer</div>
-          <div class="work-title">Little Lights Initiatives</div>
-          <div class="work-desc">Jabi School for the Blind outreach campaign</div>
-        </div>
-      </div>
-
-      <!-- 5: Promo Ad (video) -->
-      <div class="work-card" data-cat="motion"
-           data-type="video" data-src="promo ad.mp4"
-           data-title="Promo Ad"
-           data-desc="High-energy promotional advertisement with sharp motion graphics, text overlays, and synced audio — built entirely in motion design.">
-        <video class="work-media" src="promo ad.mp4" muted preload="metadata"></video>
+      <div class="work-card" data-cat="edited-videos"
+           data-type="video" data-src="SHORT FILM DOCUMENTARY.mp4"
+           data-title="The Cost of Care"
+           data-desc="Short documentary edit.">
+        <video class="work-media" src="SHORT FILM DOCUMENTARY.mp4" poster="the cost of care.jpg" muted preload="metadata"></video>
         <div class="work-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         <div class="work-overlay">
-          <div class="work-tag">Motion · Commercial Reel</div>
-          <div class="work-title">Promo Ad</div>
-          <div class="work-desc">Commercial motion graphic production</div>
+          <div class="work-tag">Edited Video</div>
+          <div class="work-title">The Cost of Care</div>
+          <div class="work-desc">Short documentary edit.</div>
         </div>
       </div>
 
-      <!-- 6: Apartment FAQ carousel -->
-      <div class="work-card"
-     data-cat="still"
-     data-type="carousel"
-
-     data-images='[
-       "APARTMENT FAQ_page-0001.jpg",
-       "APARTMENT FAQ_page-0003.jpg",
-       "APARTMENT FAQ2_page-0001.jpg",
-       "APARTMENT FAQ2_page-0002.jpg",
-       "APARTMENT FAQ2_page-0003.jpg"
-     ]'
-
-     data-title="Stay@Margarets — Apartment FAQ Carousel"
-     data-desc="5-slide Instagram carousel">
-
-    <!-- Cover image -->
-    <img class="work-media"
-         src="APARTMENT FAQ_page-0001.jpg"
-         alt="Apartment FAQ Carousel">
-
-    <!-- KEEP THIS -->
-    <div class="work-overlay">
-
-        <div class="work-tag">
-            Still · Instagram Carousel
+      <div class="work-card" data-cat="edited-videos"
+           data-type="video" data-src="PERSONAL WORK 1.mp4"
+           data-title="Short Film Project"
+           data-desc="Personal short film editing project.">
+        <video class="work-media" src="PERSONAL WORK 1.mp4" muted preload="metadata"></video>
+        <div class="work-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        <div class="work-overlay">
+          <div class="work-tag">Edited Video</div>
+          <div class="work-title">Short Film Project</div>
+          <div class="work-desc">Personal short film editing project.</div>
         </div>
+      </div>
 
-        <div class="work-title">
-            Stay@Margarets
+      <!-- ============ DINOVATE STUDIOS ============ -->
+
+      <div class="work-card" data-cat="dinovate"
+           data-type="video" data-src="SAO.mp4"
+           data-title="SAO Projects Awareness"
+           data-desc="3 Ways SAO is Solving the Energy Crisis in Nigeria — animated stills with motion text and music.">
+        <video class="work-media" src="SAO.mp4" poster="3 ways sao is solving the energy crisis in nigeria.jpg" muted preload="metadata"></video>
+        <div class="work-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        <div class="work-overlay">
+          <div class="work-tag">Dinovate Studios</div>
+          <div class="work-title">SAO Projects Awareness</div>
+          <div class="work-desc">3 Ways SAO is Solving the Energy Crisis in Nigeria — animated stills with motion text and music.</div>
         </div>
+      </div>
 
-        <div class="work-desc">
-            Apartment FAQ — 5-slide carousel
-        </div>
-
-    </div>
-
-</div>
-
-      <!-- 7: Sound Design video -->
-      <div class="work-card" data-cat="motion"
+      <div class="work-card" data-cat="dinovate"
            data-type="video" data-src="sound design.mp4"
-           data-title="Sound Design Motion Piece"
-           data-desc="Motion graphic piece with intentional sound design — kinetic typography synced tightly with audio cues for maximum sensory impact.">
-        <video class="work-media" src="sound design.mp4" muted preload="metadata"></video>
+           data-title="Graphic Intro"
+           data-desc="Kinetic typography with synced audio">
+        <video class="work-media" src="sound design.mp4" poster="dcmsi sound stuff.jpg" muted preload="metadata"></video>
         <div class="work-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         <div class="work-overlay">
-          <div class="work-tag">Motion · Sound Design</div>
-          <div class="work-title">Sound Design Piece</div>
+          <div class="work-tag">Dinovate Studios</div>
+          <div class="work-title">Graphic Intro</div>
           <div class="work-desc">Kinetic typography with synced audio</div>
         </div>
       </div>
 
-      <!-- 8: ABCD kinetic typography -->
-      <div class="work-card" data-cat="motion"
-           data-type="video" data-src="ABCD.mp4"
-           data-title="ABCD — Kinetic Typography"
-           data-desc="Bold kinetic typography animation with high visual energy and micro-adjusted text timing — smooth, punchy, and rhythmically precise.">
-        <video class="work-media" src="ABCD.mp4" muted preload="metadata"></video>
+      <div class="work-card" data-cat="dinovate"
+           data-type="video" data-src="Continuous carousel.mp4"
+           data-title="Quarterly Newsletter"
+           data-desc="Quarterly Newsletter presented with graphics">
+        <video class="work-media" src="Continuous carousel.mp4" poster="built by dinovate.jpg" muted preload="metadata"></video>
         <div class="work-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         <div class="work-overlay">
-          <div class="work-tag">Motion · Kinetic Typography</div>
-          <div class="work-title">ABCD</div>
-          <div class="work-desc">High-energy kinetic word animation</div>
+          <div class="work-tag">Dinovate Studios</div>
+          <div class="work-title">Quarterly Newsletter</div>
+          <div class="work-desc">Quarterly Newsletter presented with graphics</div>
         </div>
       </div>
 
-      <!-- 9: Valentine Flyer -->
-      <div class="work-card" data-cat="still"
+      <div class="work-card" data-cat="dinovate"
+           data-type="image" data-src="Newsletter.jpg"
+           data-title="Newsletter Flyer"
+           data-desc="Newsletter flyer design for Dinovate Studios.">
+        <img class="work-media" src="Newsletter.jpg" alt="Newsletter Flyer" loading="lazy">
+        <div class="work-overlay">
+          <div class="work-tag">Dinovate Studios</div>
+          <div class="work-title">Newsletter Flyer</div>
+          <div class="work-desc">Newsletter flyer design for Dinovate Studios.</div>
+        </div>
+      </div>
+
+      <div class="work-card" data-cat="dinovate"
+           data-type="video" data-src="Mark your Calendar!.mp4"
+           data-title="DCA Cohort 3 Countdown"
+           data-desc="Snappy countdown for the upcoming cohort">
+        <video class="work-media" src="Mark your Calendar!.mp4" poster="mark your calendar.jpg" muted preload="metadata"></video>
+        <div class="work-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        <div class="work-overlay">
+          <div class="work-tag">Dinovate Studios</div>
+          <div class="work-title">DCA Cohort 3 Countdown</div>
+          <div class="work-desc">Snappy countdown for the upcoming cohort</div>
+        </div>
+      </div>
+
+      <div class="work-card" data-cat="dinovate"
+           data-type="video" data-src="Nosa dca spotlight.mp4"
+           data-title="DCA Alumni Spotlight"
+           data-desc="Motion Graphics highlighting the experience of a DCA alumni">
+        <video class="work-media" src="Nosa dca spotlight.mp4" poster="DCA alumni spotlight.jpg" muted preload="metadata"></video>
+        <div class="work-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        <div class="work-overlay">
+          <div class="work-tag">Dinovate Studios</div>
+          <div class="work-title">DCA Alumni Spotlight</div>
+          <div class="work-desc">Motion Graphics highlighting the experience of a DCA alumni</div>
+        </div>
+      </div>
+
+      <!-- ============ MEAT & MORE NG ============ -->
+
+      <div class="work-card" data-cat="meatmore"
+           data-type="video" data-src="beef hand ad.mp4"
+           data-title="Short Promotional Ad"
+           data-desc="Short promotional advert for Meat & More.">
+        <video class="work-media" src="beef hand ad.mp4" poster="Beef Hand Ad.jpg" muted preload="metadata"></video>
+        <div class="work-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        <div class="work-overlay">
+          <div class="work-tag">Meat &amp; More NG</div>
+          <div class="work-title">Short Promotional Ad</div>
+          <div class="work-desc">Short promotional advert for Meat &amp; More.</div>
+        </div>
+      </div>
+
+      <div class="work-card" data-cat="meatmore"
            data-type="image" data-src="Valentine flyer_page-0001.jpg"
-           data-title="Meat & More — Valentine's Day Ad"
-           data-desc="Valentine's Day promotional flyer for Meat & More Lagos — bold Pidgin headline with high-contrast meat heart product photography. 50% off deliveries campaign.">
+           data-title="Valentine Flyer"
+           data-desc="Valentine's Day promotional flyer for Meat & More.">
         <img class="work-media" src="Valentine flyer_page-0001.jpg" alt="Valentine Flyer" loading="lazy">
         <div class="work-overlay">
-          <div class="work-tag">Still · Promotional Flyer</div>
-          <div class="work-title">Meat & More</div>
-          <div class="work-desc">Valentine's Day — "Love no dey chop flower"</div>
+          <div class="work-tag">Meat &amp; More NG</div>
+          <div class="work-title">Valentine Flyer</div>
+          <div class="work-desc">Valentine's Day promotional flyer for Meat &amp; More.</div>
         </div>
       </div>
 
-      <!-- 10: Apostolic Church -->
-      <div class="work-card" data-cat="motion"
-           data-type="video" data-src="Apostolic Church.mp4"
-           data-title="Apostolic Church Motion Graphic"
-           data-desc="Motion graphic piece for Apostolic Church — clean, reverent animation combining bold text reveals with carefully timed transitions.">
-        <video class="work-media" src="Apostolic Church.mp4" muted preload="metadata"></video>
+      <div class="work-card" data-cat="meatmore"
+           data-type="image" data-src="HAPPY EASTER.jpg"
+           data-title="Easter Flyer"
+           data-desc="Easter promotional flyer for Meat & More.">
+        <img class="work-media" src="HAPPY EASTER.jpg" alt="Easter Flyer" loading="lazy">
+        <div class="work-overlay">
+          <div class="work-tag">Meat &amp; More NG</div>
+          <div class="work-title">Easter Flyer</div>
+          <div class="work-desc">Easter promotional flyer for Meat &amp; More.</div>
+        </div>
+      </div>
+
+      <div class="work-card" data-cat="meatmore"
+           data-type="video" data-src="cow.mp4"
+           data-title="Promotional Advert"
+           data-desc="Promotional advert for Meat & More.">
+        <video class="work-media" src="cow.mp4" poster="cow.jpg" muted preload="metadata"></video>
         <div class="work-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         <div class="work-overlay">
-          <div class="work-tag">Motion · Church Graphic</div>
-          <div class="work-title">Apostolic Church</div>
-          <div class="work-desc">Animated motion graphic production</div>
+          <div class="work-tag">Meat &amp; More NG</div>
+          <div class="work-title">Promotional Advert</div>
+          <div class="work-desc">Promotional advert for Meat &amp; More.</div>
         </div>
       </div>
 
-      <!-- 11: Card Affirmations -->
-      <div class="work-card" data-cat="still"
-           data-type="image" data-src="Card affirmations_page-0001.jpg"
-           data-title="Little Blossom Cards — Mini Affirmation Set"
-           data-desc="Children's affirmation card set for @LittleBlossomCards — playful, colourful layouts with handwritten-style typography designed to inspire and uplift young minds.">
-        <img class="work-media" src="Card affirmations_page-0001.jpg" alt="Affirmation Cards" loading="lazy">
+      <!-- ============ LAGOS STATE GOVERNMENT ============ -->
+
+      <div class="work-card"
+           data-cat="lagos"
+           data-type="carousel"
+           data-images='[
+             "ALARHOSPS Front Cover.jpg",
+             "ALARHOSPS Back Cover.jpg"
+           ]'
+           data-title="ALRHOSPS Book Cover"
+           data-desc="Notebook Cover for the 13th Summit of ALARHOSPS">
+        <img class="work-media" src="ALARHOSPS Front Cover.jpg" alt="ALRHOSPS Book Cover">
         <div class="work-overlay">
-          <div class="work-tag">Still · Card Design</div>
-          <div class="work-title">Little Blossom Cards</div>
-          <div class="work-desc">Mini Affirmation Set — children's card series</div>
+          <div class="work-tag">Instagram Carousel</div>
+          <div class="work-title">ALRHOSPS Book Cover</div>
+          <div class="work-desc">Notebook Cover for the 13th Summit of ALARHOSPS</div>
         </div>
       </div>
 
-      <!-- 12: ABCD 2 -->
-      <div class="work-card" data-cat="motion"
-           data-type="video" data-src="ABCD 2.mp4"
-           data-title="ABCD 2 — Kinetic Typography Vol. 2"
-           data-desc="Second instalment of the ABCD kinetic typography series — evolved motion design with more complex layering and sound-synced text bursts.">
-        <video class="work-media" src="ABCD 2.mp4" muted preload="metadata"></video>
-        <div class="work-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      <div class="work-card"
+           data-cat="lagos"
+           data-type="carousel"
+           data-images='[
+             "book cover 2 (1).jpg",
+             "book cover 2 (2).jpg"
+           ]'
+           data-title="Training Manual Book Cover"
+           data-desc="Book Cover for Post Service Dept. Training for Retirees">
+        <img class="work-media" src="book cover 2 (1).jpg" alt="Training Manual Book Cover">
         <div class="work-overlay">
-          <div class="work-tag">Motion · Kinetic Typography</div>
-          <div class="work-title">ABCD Vol. 2</div>
-          <div class="work-desc">Evolved kinetic word animation series</div>
+          <div class="work-tag">Instagram Carousel</div>
+          <div class="work-title">Training Manual Book Cover</div>
+          <div class="work-desc">Book Cover for Post Service Dept. Training for Retirees</div>
+        </div>
+      </div>
+
+      <!-- ============ LOGOS ============ -->
+
+      <div class="work-card" data-cat="logos"
+           data-type="image" data-src="Ofada space 1.png"
+           data-title="Ofada Space"
+           data-desc="Logo design.">
+        <img class="work-media" src="Ofada space 1.png" alt="Ofada Space" loading="lazy">
+        <div class="work-overlay">
+          <div class="work-tag">Logo</div>
+          <div class="work-title">Ofada Space</div>
+          <div class="work-desc">Logo design.</div>
+        </div>
+      </div>
+
+      <div class="work-card" data-cat="logos"
+           data-type="image" data-src="Nite Studios.jpg"
+           data-title="Nite Studios"
+           data-desc="Logo design.">
+        <img class="work-media" src="Nite Studios.jpg" alt="Nite Studios" loading="lazy">
+        <div class="work-overlay">
+          <div class="work-tag">Logo</div>
+          <div class="work-title">Nite Studios</div>
+          <div class="work-desc">Logo design.</div>
+        </div>
+      </div>
+
+      <div class="work-card" data-cat="logos"
+           data-type="image" data-src="Little Lights Initiative.jpg"
+           data-title="Little Lights Initiative"
+           data-desc="Logo design.">
+        <img class="work-media" src="Little Lights Initiative.jpg" alt="Little Lights Initiative" loading="lazy">
+        <div class="work-overlay">
+          <div class="work-tag">Logo</div>
+          <div class="work-title">Little Lights Initiative</div>
+          <div class="work-desc">Logo design.</div>
+        </div>
+      </div>
+
+      <div class="work-card" data-cat="logos"
+           data-type="image" data-src="Amee's Kitchen.jpg"
+           data-title="Amee's Kitchen"
+           data-desc="Logo design.">
+        <img class="work-media" src="Amee's Kitchen.jpg" alt="Amee's Kitchen" loading="lazy">
+        <div class="work-overlay">
+          <div class="work-tag">Logo</div>
+          <div class="work-title">Amee's Kitchen</div>
+          <div class="work-desc">Logo design.</div>
+        </div>
+      </div>
+
+      <!-- ============ OTHERS ============ -->
+
+      <div class="work-card work-large" data-cat="others"
+           data-type="carousel"
+           data-images='[
+             "my guy.jpg",
+             "my guy (services).jpg"
+           ]'
+           data-title="MyGuy Prime Limited"
+           data-desc="Service-focused social media carousel for MyGuy Prime.">
+        <img class="work-media" src="my guy.jpg" alt="MyGuy Prime">
+        <div class="work-overlay">
+          <div class="work-tag">Instagram Carousel</div>
+          <div class="work-title">MyGuy Prime Limited</div>
+          <div class="work-desc">Service-focused social media carousel for MyGuy Prime.</div>
+        </div>
+      </div>
+
+      <div class="work-card" data-cat="others"
+           data-type="image" data-src="Jabi School for the Blind_page-0001 (1).jpg"
+           data-title="Little Lights Initiative"
+           data-desc="Jabi School for the Blind Outreach Campaign">
+        <img class="work-media" src="Jabi School for the Blind_page-0001 (1).jpg" alt="Little Lights Initiative" loading="lazy">
+        <div class="work-overlay">
+          <div class="work-tag">NGO Flyer</div>
+          <div class="work-title">Little Lights Initiative</div>
+          <div class="work-desc">Jabi School for the Blind Outreach Campaign</div>
         </div>
       </div>
 
@@ -1404,23 +1576,60 @@ const revealObs=new IntersectionObserver(entries=>{
 },{threshold:.1});
 document.querySelectorAll('.reveal,.work-card').forEach(el=>revealObs.observe(el));
 
-/* ══════════════ FILTER ══════════════ */
-document.querySelectorAll('.filter-btn').forEach(btn=>{
-  btn.addEventListener('click',function(){
-    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
-    this.classList.add('active');
-    const f=this.dataset.filter;
-    document.querySelectorAll('.work-card').forEach(card=>{
-      const show=f==='all'||card.dataset.cat===f;
-      card.classList.toggle('hidden',!show);
-      if(show){
-        // re-trigger reveal animation
-        card.classList.remove('visible');
-        setTimeout(()=>{card.classList.add('visible');},50);
-      }
-    });
+/* ══════════════ CATEGORY COVERS ══════════════ */
+const workCategories=document.getElementById('workCategories');
+const workBackBar=document.getElementById('workBackBar');
+const workGrid=document.getElementById('workGrid');
+const workBackBtn=document.getElementById('workBackBtn');
+const workCategoryHeading=document.getElementById('workCategoryHeading');
+
+const categoryLabels={
+  'edited-videos':'Edited Videos',
+  'dinovate':'Dinovate Studios',
+  'meatmore':'Meat & More NG',
+  'lagos':'Lagos State Government',
+  'logos':'Logos',
+  'others':'Others'
+};
+
+function showCategory(cat){
+  workCategories.style.display='none';
+  workBackBar.classList.add('visible');
+  workGrid.classList.add('visible');
+  workCategoryHeading.textContent=categoryLabels[cat]||'';
+
+  document.querySelectorAll('.work-card').forEach(card=>{
+    const show=card.dataset.cat===cat;
+    card.classList.toggle('hidden',!show);
+    if(show){
+      // re-trigger reveal animation
+      card.classList.remove('visible');
+      setTimeout(()=>{card.classList.add('visible');},50);
+    }
+  });
+
+  document.getElementById('work').scrollIntoView({behavior:'smooth'});
+}
+
+function showCategoryList(){
+  workGrid.classList.remove('visible');
+  workBackBar.classList.remove('visible');
+  workCategories.style.display='';
+  document.querySelectorAll('.work-card').forEach(card=>{
+    card.classList.add('hidden');
+  });
+}
+
+document.querySelectorAll('.category-card').forEach(card=>{
+  card.addEventListener('click',()=>{
+    showCategory(card.dataset.category);
   });
 });
+
+workBackBtn.addEventListener('click',showCategoryList);
+
+// Start with every work-card hidden until a category is chosen
+document.querySelectorAll('.work-card').forEach(card=>card.classList.add('hidden'));
 
 /* ══════════════ LIGHTBOX ══════════════ */
 const lightbox=document.getElementById('lightbox');
