@@ -1484,7 +1484,7 @@ function playShutterSound(){
     const clickSrc = ac.createBufferSource();
     clickSrc.buffer = clickBuf;
     const clickGain = ac.createGain();
-    clickGain.gain.setValueAtTime(2, ac.currentTime);
+    clickGain.gain.setValueAtTime(2.5, ac.currentTime);
     clickGain.gain.exponentialRampToValueAtTime(0.001, ac.currentTime + 0.04);
     // High-pass to make it crisp
     const hp = ac.createBiquadFilter();
@@ -1493,7 +1493,7 @@ function playShutterSound(){
     clickSrc.start(ac.currentTime);
 
     // ── Shutter curtain whoosh (low thud) ──
-    const thudBuf = ac.createBuffer(1, ac.sampleRate * 0.12, ac.sampleRate);
+    const thudBuf = ac.createBuffer(1.5, ac.sampleRate * 0.12, ac.sampleRate);
     const td = thudBuf.getChannelData(0);
     for(let i=0;i<td.length;i++){
       td[i] = (Math.random()*2-1) * Math.pow(1 - i/td.length, 3);
