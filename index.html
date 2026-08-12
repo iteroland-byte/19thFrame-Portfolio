@@ -162,13 +162,14 @@ body::before{
   color:rgba(176,38,255,.6);
   animation:blink 1.5s ease-in-out infinite;
 }
+
+@keyframes blink{0%,100%{opacity:.3}50%{opacity:1}}
+
 .flash.warning{
-  font-size:.65rem;font-weight:500;letter-spacing:2px;
+  font-size:.70rem;font-weight:500;letter-spacing:2px;
   color:rgba(176,38,255,.4);
   margin-top:3px;
 }
-@keyframes blink{0%,100%{opacity:.3}50%{opacity:1}}
-
 /* FLASH overlay */
 #flash-overlay{
   position:fixed;inset:0;z-index:10001;
