@@ -308,6 +308,31 @@
   }
   .card:hover .card-accent-bar { transform: scaleX(1); }
 
+  /* ── SERVICE CARD ALIGNMENT ── */
+.cards-grid .card {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Keep all card titles at the same height */
+.cards-grid .card-title {
+  min-height: 58px;
+}
+
+/* Keep all descriptions at the same height */
+.cards-grid .card-desc {
+  min-height: 92px;
+}
+
+/* Keep the "Best for" sections aligned */
+.cards-grid .card-includes {
+  min-height: 105px;
+}
+
+/* Push prices to the same vertical position */
+.cards-grid .price-range {
+  margin-top: auto;
+}
   /* ── PACKAGES ── */
   .packages-grid {
     display: grid;
