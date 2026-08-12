@@ -158,15 +158,27 @@ body::before{
   text-shadow:0 0 20px rgba(176,38,255,.9),0 0 50px rgba(176,38,255,.5);
 }
 .shutter-click-text{
-  font-size:1rem;font-weight:600;letter-spacing:3px;
-  color:rgba(176,38,255,.6);
+  font-size:1rem;font-weight:700;letter-spacing:3px;
+  color:#ffffff;
   animation:blink 1.5s ease-in-out infinite;
 }
+
 .flash-warning{
-  font-size:.8rem;font-weight:500;letter-spacing:2px;
-  color:rgba(176,38,255,.4);
+  font-size:.8rem;font-weight:700;letter-spacing:2px;
+  color:#ffffff;
   margin-top:1.2px;
   animation:none;
+}
+
+/* ── BLINK ANIMATION ── */
+@keyframes blink {
+  0%, 100% {
+    opacity: 0.4;
+  }
+
+  50% {
+    opacity: 1;
+  }
 }
 
 /* FLASH overlay */
@@ -843,7 +855,7 @@ footer{
     </div>
     <div class="intro-brand"><span class="w">19th</span><span class="p">Frame</span></div>
     <div class="shutter-click-text">CLICK TO ENTER</div>
-    <div class="shutter-click-text flash-warning"><em>*flash warning*</em></div>
+    <div class="flash-warning"><em>*flash warning*</em></div>
   </div>
 </div>
 
