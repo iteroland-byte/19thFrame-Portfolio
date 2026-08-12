@@ -241,15 +241,16 @@
   .card::before {
     content: '';
     position: absolute; inset: 0;
-    background: linear-gradient(135deg, var(--neon-purple-faint) 0%, transparent 60%);
+    background: linear-gradient(135deg, var(--neon-purple-faint) 0%, transparent 50%);
     opacity: 0;
     transition: opacity 0.35s ease;
     pointer-events: none;
   }
   .card:hover::before { opacity: 1; }
   .card:hover {
+    transform: translateY(-6px);
     border-color: rgba(176,38,255,0.5);
-    background: radial-gradient(circle, rgba(176,38,255,0.15) 0%, transparent 80%);
+    background: radial-gradient(circle, rgba(176,38,255,0.15) 0%, transparent 60%);
     box-shadow: 0 0 30px rgba(176,38,255,0.2), 0 20px 40px rgba(0,0,0,0.4);
     transition: transform 0.5s ease;
   }
@@ -297,15 +298,6 @@
     color: rgba(255,255,255,0.35);
     margin-top: 3px;
   }
-  .card-accent-bar {
-    position: absolute; top: 0; left: 0; right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--neon-purple), var(--neon-purple-dim));
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.4s ease;
-  }
-  .card:hover .card-accent-bar { transform: scaleX(1); }
 
   /* ── SERVICE CARD ALIGNMENT ── */
 .cards-grid .card {
@@ -353,7 +345,7 @@
   .package-card::before {
     content: '';
     position: absolute; inset: 0;
-    background: linear-gradient(135deg, var(--neon-purple-faint) 0%, transparent 60%);
+    background: linear-gradient(135deg, var(--neon-purple-faint) 0%, transparent 50%);
     opacity: 0;
     transition: opacity 0.35s ease;
     pointer-events: none;
@@ -362,7 +354,7 @@
   .package-card:hover {
     transform: translateY(-6px);
     border-color: rgba(176,38,255,0.5);
-    background: radial-gradient(circle, rgba(176,38,255,0.15) 0%, transparent 50%);
+    background: radial-gradient(circle, rgba(176,38,255,0.15) 0%, transparent 60%);
     box-shadow: 0 0 30px rgba(176,38,255,0.2), 0 20px 40px rgba(0,0,0,0.4);
     transition: transform 0.5s ease;
   }
@@ -606,7 +598,6 @@
     <div class="section-sub">Clean, structured layouts for social media, branding &amp; corporate announcements. Delivered as .png &amp; .pdf.</div>
     <div class="cards-grid">
       <div class="card">
-        <div class="card-accent-bar"></div>
         <div class="card-label">Most Popular</div>
         <div class="card-title">Standard Flyer</div>
         <div class="card-desc">Single-page digital flyer for announcements, promotions, events, offers, soical posts &amp; brand communication.</div>
@@ -617,7 +608,6 @@
         <div class="price-label">per flyer</div>
       </div>
       <div class="card">
-        <div class="card-accent-bar"></div>
         <div class="card-label">Branding</div>
         <div class="card-title">Product Branding Assets</div>
         <div class="card-desc">Small branded assets designed for products, packaging or customer experience</div>
@@ -628,7 +618,6 @@
         <div class="price-label">per asset *print production not included* </div>
       </div>
       <div class="card">
-        <div class="card-accent-bar"></div>
         <div class="card-label">Multi-Slide</div>
         <div class="card-title">Carousel / Multi-Slide Design</div>
         <div class="card-desc">A sequence of connected designs built to communicate information or tell a story across multiple slides.</div>
@@ -649,7 +638,6 @@
     <div class="section-sub">Dynamic, timed assets — kinetic typography, transitions, and sound design. Delivered as .mp4</div>
     <div class="cards-grid">
       <div class="card">
-        <div class="card-accent-bar"></div>
         <div class="card-label">Motion</div>
         <div class="card-title">Short Teaser / Countdown</div>
         <div class="card-desc">5–10 second motion pieces designed to create anticipation or announce something quickly. High impact, fast delivery.</div>
@@ -660,7 +648,6 @@
         <div class="price-label">per animation · 5-10 seconds</div>
       </div>
       <div class="card">
-        <div class="card-accent-bar"></div>
         <div class="card-label">Typography</div>
         <div class="card-title">Kinetic Typography</div>
         <div class="card-desc">Text-led motion graphics where motion text, rhythm, sound and movement carry the visual.</div>
@@ -671,7 +658,6 @@
         <div class="price-label">per video · up to ~15 seconds</div>
       </div>
       <div class="card">
-        <div class="card-accent-bar"></div>
         <div class="card-label">Commercial</div>
         <div class="card-title">Commercial Reel</div>
         <div class="card-desc">A fully art-directed short-form commercial combining motion graphics, visual composition, typography, transitions and sound design.</div>
