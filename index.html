@@ -158,18 +158,18 @@ body::before{
   text-shadow:0 0 20px rgba(176,38,255,.9),0 0 50px rgba(176,38,255,.5);
 }
 .shutter-click-text{
-  font-size:.75rem;font-weight:600;letter-spacing:3px;
+  font-size:.80rem;font-weight:600;letter-spacing:3px;
   color:rgba(176,38,255,.6);
   animation:blink 1.5s ease-in-out infinite;
 }
-
-@keyframes blink{0%,100%{opacity:.3}50%{opacity:1}}
-
 .flash.warning{
-  font-size:.70rem;font-weight:500;letter-spacing:2px;
+  font-size:.75rem;font-weight:500;letter-spacing:2px;
   color:rgba(176,38,255,.4);
   margin-top:3px;
+  animation: none !important;
 }
+@keyframes blink{0%,100%{opacity:.3}50%{opacity:1}}
+
 /* FLASH overlay */
 #flash-overlay{
   position:fixed;inset:0;z-index:10001;
