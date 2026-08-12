@@ -1272,6 +1272,18 @@ footer{
         </div>
       </div>
 
+       <div class="work-card" data-cat="others"
+           data-type="image" data-src="affirmation cards.jpg"
+           data-title="Affirmation Cards Strip"
+           data-desc="Set of affirmation cards.">
+        <img class="work-media" src="affirmation cards.jpg" alt="Affirmation Cards" loading="lazy">
+        <div class="work-overlay">
+          <div class="work-tag">Party Favour</div>
+          <div class="work-title">Affirmation Cards Strip</div>
+          <div class="work-desc">Set of affirmation cards.</div>
+        </div>
+      </div>
+
       <div class="work-card work-large" data-cat="others"
            data-type="carousel"
            data-images='[
@@ -1484,7 +1496,7 @@ function playShutterSound(){
     const clickSrc = ac.createBufferSource();
     clickSrc.buffer = clickBuf;
     const clickGain = ac.createGain();
-    clickGain.gain.setValueAtTime(2.5, ac.currentTime);
+    clickGain.gain.setValueAtTime(3, ac.currentTime);
     clickGain.gain.exponentialRampToValueAtTime(0.001, ac.currentTime + 0.04);
     // High-pass to make it crisp
     const hp = ac.createBiquadFilter();
@@ -1501,7 +1513,7 @@ function playShutterSound(){
     const thudSrc = ac.createBufferSource();
     thudSrc.buffer = thudBuf;
     const thudGain = ac.createGain();
-    thudGain.gain.setValueAtTime(1, ac.currentTime + 0.01);
+    thudGain.gain.setValueAtTime(1.5, ac.currentTime + 0.01);
     thudGain.gain.exponentialRampToValueAtTime(0.001, ac.currentTime + 0.13);
     // Low-pass for the thud feel
     const lp = ac.createBiquadFilter();
@@ -1518,7 +1530,7 @@ function playShutterSound(){
     }
     snap2Src.buffer = snap2Buf;
     const snap2Gain = ac.createGain();
-    snap2Gain.gain.setValueAtTime(0.8, ac.currentTime + 0.06);
+    snap2Gain.gain.setValueAtTime(1, ac.currentTime + 0.06);
     snap2Gain.gain.exponentialRampToValueAtTime(0.001, ac.currentTime + 0.09);
     const hp2 = ac.createBiquadFilter();
     hp2.type = 'highpass'; hp2.frequency.value = 1200;
