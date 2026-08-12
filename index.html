@@ -1054,7 +1054,7 @@ footer{
            data-type="video" data-src="Mark you Calendar!.mp4"
            data-title="DCA Countdown"
            data-desc="Snappy countdown for Dinovate Creative Academy.">
-        <video class="work-media" src="Mark you Calendar!.mp4" poster="Mark your Calendar!.jpg" muted preload="metadata"></video>
+        <video class="work-media" src="Mark your Calendar!.mp4" poster="Mark your Calendar!.jpg" muted preload="metadata"></video>
         <div class="work-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         <div class="work-overlay">
           <div class="work-tag">Dinovate Studios</div>
@@ -1064,10 +1064,10 @@ footer{
       </div>
 
      <div class="work-card" data-cat="dinovate"
-           data-type="video" data-src="Nosa dca spotlight.mp4"
+           data-type="video" data-src="Nosa dca spotlight.MP4"
            data-title="DCA Alumni Spotlight"
            data-desc="Motion Graphics highlighting the experience of a DCA alumni">
-        <video class="work-media" src="Nosa dca spotlight.mp4" poster="DCA Alumni Spotlight .jpg" muted preload="metadata"></video>
+        <video class="work-media" src="Nosa dca spotlight.MP4" poster="DCA Alumni Spotlight .jpg" muted preload="metadata"></video>
         <div class="work-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         <div class="work-overlay">
           <div class="work-tag">Dinovate Studios</div>
@@ -1484,7 +1484,7 @@ function playShutterSound(){
     const clickSrc = ac.createBufferSource();
     clickSrc.buffer = clickBuf;
     const clickGain = ac.createGain();
-    clickGain.gain.setValueAtTime(0.9, ac.currentTime);
+    clickGain.gain.setValueAtTime(2, ac.currentTime);
     clickGain.gain.exponentialRampToValueAtTime(0.001, ac.currentTime + 0.04);
     // High-pass to make it crisp
     const hp = ac.createBiquadFilter();
@@ -1501,7 +1501,7 @@ function playShutterSound(){
     const thudSrc = ac.createBufferSource();
     thudSrc.buffer = thudBuf;
     const thudGain = ac.createGain();
-    thudGain.gain.setValueAtTime(0.4, ac.currentTime + 0.01);
+    thudGain.gain.setValueAtTime(1, ac.currentTime + 0.01);
     thudGain.gain.exponentialRampToValueAtTime(0.001, ac.currentTime + 0.13);
     // Low-pass for the thud feel
     const lp = ac.createBiquadFilter();
@@ -1518,7 +1518,7 @@ function playShutterSound(){
     }
     snap2Src.buffer = snap2Buf;
     const snap2Gain = ac.createGain();
-    snap2Gain.gain.setValueAtTime(0.5, ac.currentTime + 0.06);
+    snap2Gain.gain.setValueAtTime(0.8, ac.currentTime + 0.06);
     snap2Gain.gain.exponentialRampToValueAtTime(0.001, ac.currentTime + 0.09);
     const hp2 = ac.createBiquadFilter();
     hp2.type = 'highpass'; hp2.frequency.value = 1200;
@@ -1639,77 +1639,347 @@ workBackBtn.addEventListener('click',showCategoryList);
 // Start with every work-card hidden until a category is chosen
 document.querySelectorAll('.work-card').forEach(card=>card.classList.add('hidden'));
 
+```js
 /* ══════════════ LIGHTBOX ══════════════ */
-const lightbox=document.getElementById('lightbox');
-const lbVideo=document.getElementById('lightbox-media');
-const lbImg=document.getElementById('lightbox-img');
-const lbTitle=document.getElementById('lightbox-title');
-const lbDesc=document.getElementById('lightbox-desc');
-const lbClose=document.getElementById('lightbox-close');
+const lightbox = document.getElementById('lightbox');
+const lbVideo = document.getElementById('lightbox-media');
+const lbImg = document.getElementById('lightbox-img');
+const lbTitle = document.getElementById('lightbox-title');
+const lbDesc = document.getElementById('lightbox-desc');
+const lbClose = document.getElementById('lightbox-close');
 
-document.querySelectorAll('.work-card').forEach(card=>{
-  card.addEventListener('click',()=>{
-    const type=card.dataset.type;
-    const src=card.dataset.src;
-    const images=card.dataset.images;
-    const title=card.dataset.title;
-    const desc=card.dataset.desc;
-    lbTitle.textContent=title;
-    lbDesc.textContent=desc;
-    if(type==='video'){
-      lbVideo.style.display='block';lbImg.style.display='none';
-      lbVideo.src=src;lbVideo.play();
-   }else{
-    lbImg.style.display='block';
-    lbVideo.style.display='none';
+// Current project
+let currentCardIndex = 0;
 
-    // If card has multiple images
-    if(images){
+// Multi-image gallery inside the current project
+let currentGallery = [];
+let currentGalleryIndex = 0;
 
-        const gallery = JSON.parse(images);
+// Touch/swipe tracking
+let touchStartX = 0;
+let touchStartY = 0;
 
-        let current = 0;
 
-        lbImg.src = gallery[current];
+/* ══════════════ GET CURRENT CATEGORY CARDS ══════════════ */
 
-        // NEXT IMAGE ON CLICK
-        lbImg.onclick = () => {
+function getVisibleWorkCards(){
+  return Array.from(document.querySelectorAll('.work-card'))
+    .filter(card => !card.classList.contains('hidden'));
+}
 
-            current++;
 
-            if(current >= gallery.length){
-                current = 0;
-            }
+/* ══════════════ LOAD A PROJECT INTO LIGHTBOX ══════════════ */
 
-            lbImg.src = gallery[current];
-        };
+function loadWorkCard(card){
+
+  const type = card.dataset.type;
+  const src = card.dataset.src;
+  const images = card.dataset.images;
+  const title = card.dataset.title || '';
+  const desc = card.dataset.desc || '';
+
+  lbTitle.textContent = title;
+  lbDesc.textContent = desc;
+
+  // Reset previous media
+  lbVideo.pause();
+  lbVideo.src = '';
+  lbImg.src = '';
+
+  currentGallery = [];
+  currentGalleryIndex = 0;
+
+
+  /* ────────────── VIDEO ────────────── */
+
+  if(type === 'video'){
+
+    lbVideo.style.display = 'block';
+    lbImg.style.display = 'none';
+
+    lbVideo.src = src;
+    lbVideo.currentTime = 0;
+
+    lbVideo.play().catch(() => {});
+
+    return;
+  }
+
+
+  /* ────────────── IMAGE ────────────── */
+
+  lbImg.style.display = 'block';
+  lbVideo.style.display = 'none';
+
+
+  // Project contains multiple images
+  if(images){
+
+    try{
+      currentGallery = JSON.parse(images);
+    }catch(e){
+      currentGallery = [];
+    }
+
+    if(currentGallery.length > 0){
+
+      lbImg.src = currentGallery[0];
+
+      // Clicking the image moves through images
+      // belonging to this same project
+      lbImg.onclick = () => {
+
+        if(currentGallery.length <= 1) return;
+
+        currentGalleryIndex++;
+
+        if(currentGalleryIndex >= currentGallery.length){
+          currentGalleryIndex = 0;
+        }
+
+        lbImg.src = currentGallery[currentGalleryIndex];
+      };
 
     }else{
 
-        lbImg.src = src;
+      lbImg.src = src;
+      lbImg.onclick = null;
 
     }
+
+  }else{
+
+    currentGallery = [src];
+    currentGalleryIndex = 0;
+
+    lbImg.src = src;
+    lbImg.onclick = null;
+
+  }
 }
-    lightbox.classList.add('open');
-    document.body.style.overflow='hidden';
-    // Scale in
-    setTimeout(()=>{
-      if(type==='video')lbVideo.style.transform='scale(1)';
-      else lbImg.style.transform='scale(1)';
-    },50);
+
+
+/* ══════════════ OPEN PROJECT ══════════════ */
+
+function openWorkCard(card){
+
+  const cards = getVisibleWorkCards();
+
+  currentCardIndex = cards.indexOf(card);
+
+  if(currentCardIndex === -1) return;
+
+  loadWorkCard(card);
+
+  lightbox.classList.add('open');
+  document.body.style.overflow = 'hidden';
+
+  // Reset scale before animation
+  lbVideo.style.transform = 'scale(.85)';
+  lbImg.style.transform = 'scale(.85)';
+
+  setTimeout(() => {
+
+    if(card.dataset.type === 'video'){
+      lbVideo.style.transform = 'scale(1)';
+    }else{
+      lbImg.style.transform = 'scale(1)';
+    }
+
+  }, 50);
+}
+
+
+/* ══════════════ NEXT PROJECT ══════════════ */
+
+function nextWork(){
+
+  const cards = getVisibleWorkCards();
+
+  if(cards.length <= 1) return;
+
+  currentCardIndex++;
+
+  // Loop back to first project
+  if(currentCardIndex >= cards.length){
+    currentCardIndex = 0;
+  }
+
+  loadWorkCard(cards[currentCardIndex]);
+}
+
+
+/* ══════════════ PREVIOUS PROJECT ══════════════ */
+
+function previousWork(){
+
+  const cards = getVisibleWorkCards();
+
+  if(cards.length <= 1) return;
+
+  currentCardIndex--;
+
+  // Loop to last project
+  if(currentCardIndex < 0){
+    currentCardIndex = cards.length - 1;
+  }
+
+  loadWorkCard(cards[currentCardIndex]);
+}
+
+
+/* ══════════════ OPEN ALL WORK CARDS ══════════════ */
+
+document.querySelectorAll('.work-card').forEach(card => {
+
+  card.addEventListener('click', e => {
+
+    /*
+      If clicking an image already inside the lightbox,
+      don't reopen the project.
+    */
+    if(e.target === lbImg || e.target === lbVideo){
+      return;
+    }
+
+    openWorkCard(card);
+
   });
+
 });
 
+
+/* ══════════════ CLOSE LIGHTBOX ══════════════ */
+
 function closeLightbox(){
+
   lightbox.classList.remove('open');
-  lbVideo.pause();lbVideo.src='';
-  lbImg.src='';
-  document.body.style.overflow='';
-  lbVideo.style.transform='scale(.85)';lbImg.style.transform='scale(.85)';
+
+  lbVideo.pause();
+  lbVideo.src = '';
+
+  lbImg.src = '';
+  lbImg.onclick = null;
+
+  currentGallery = [];
+  currentGalleryIndex = 0;
+
+  document.body.style.overflow = '';
+
+  lbVideo.style.transform = 'scale(.85)';
+  lbImg.style.transform = 'scale(.85)';
 }
-lbClose.addEventListener('click',closeLightbox);
-lightbox.addEventListener('click',e=>{if(e.target===lightbox)closeLightbox();});
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox();});
+
+
+/* ══════════════ CLOSE BUTTON ══════════════ */
+
+lbClose.addEventListener('click', closeLightbox);
+
+
+/* ══════════════ CLICK OUTSIDE TO CLOSE ══════════════ */
+
+lightbox.addEventListener('click', e => {
+
+  if(e.target === lightbox){
+    closeLightbox();
+  }
+
+});
+
+
+/* ══════════════ LAPTOP KEYBOARD NAVIGATION ══════════════ */
+
+document.addEventListener('keydown', e => {
+
+  // Only work while lightbox is open
+  if(!lightbox.classList.contains('open')) return;
+
+
+  // ESC = close
+  if(e.key === 'Escape'){
+
+    e.preventDefault();
+    closeLightbox();
+    return;
+
+  }
+
+
+  // RIGHT ARROW = NEXT PROJECT
+  if(e.key === 'ArrowRight'){
+
+    e.preventDefault();
+    nextWork();
+    return;
+
+  }
+
+
+  // LEFT ARROW = PREVIOUS PROJECT
+  if(e.key === 'ArrowLeft'){
+
+    e.preventDefault();
+    previousWork();
+    return;
+
+  }
+
+});
+
+
+/* ══════════════ PHONE / TABLET SWIPE NAVIGATION ══════════════ */
+
+lightbox.addEventListener('touchstart', e => {
+
+  if(e.touches.length !== 1) return;
+
+  touchStartX = e.touches[0].clientX;
+  touchStartY = e.touches[0].clientY;
+
+}, { passive: true });
+
+
+lightbox.addEventListener('touchend', e => {
+
+  if(e.changedTouches.length !== 1) return;
+
+  const touchEndX = e.changedTouches[0].clientX;
+  const touchEndY = e.changedTouches[0].clientY;
+
+  const deltaX = touchEndX - touchStartX;
+  const deltaY = touchEndY - touchStartY;
+
+  // Minimum distance required for a swipe
+  const minSwipeDistance = 60;
+
+  // Ignore short movements
+  if(Math.abs(deltaX) < minSwipeDistance) return;
+
+  // Ignore mostly vertical movements
+  if(Math.abs(deltaX) < Math.abs(deltaY)) return;
+
+
+  /*
+    SWIPE LEFT = NEXT PROJECT
+  */
+  if(deltaX < 0){
+
+    nextWork();
+
+  }
+
+
+  /*
+    SWIPE RIGHT = PREVIOUS PROJECT
+  */
+  else{
+
+    previousWork();
+
+  }
+
+}, { passive: true });
+```
 
 /* ══════════════ VIDEO HOVER PREVIEW ══════════════ */
 document.querySelectorAll('.work-card[data-type="video"]').forEach(card=>{
