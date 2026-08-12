@@ -269,6 +269,22 @@
     margin-bottom: 20px;
     line-height: 1.6;
   }
+  .card-includes {
+    font-size: 0.83rem; font-weight: 400;
+    color: var(--white-dim);
+    margin-bottom: 24px;
+    line-height: 1.8;
+  }
+    .card-includes span {
+    display: block;
+    padding-left: 18px;
+    position: relative;
+  }
+  .card-includes span::before {
+    content: '▸';
+    position: absolute; left: 0;
+    color: var(--neon-purple);
+  }
   .price-range {
     font-size: 1.3rem; font-weight: 800;
     color: var(--neon-purple);
