@@ -250,7 +250,7 @@
   .card:hover {
     transform: translateY(-6px);
     border-color: rgba(176,38,255,0.5);
-    background: radial-gradient(circle, rgba(176,38,255,0.15) 0%, transparent 60%);
+    background: radial-gradient(circle, rgba(176,38,255,0.15) 0%, transparent 50%);
     box-shadow: 0 0 30px rgba(176,38,255,0.2), 0 20px 40px rgba(0,0,0,0.4);
     transition: transform 0.5s ease;
   }
@@ -321,20 +321,21 @@
 
 /* Keep all descriptions at the same height */
 .cards-grid .card-desc {
-  min-height: 92px;
+  min-height: 75px;
 }
 
 /* Keep the "Best for" sections aligned */
 .cards-grid .card-includes {
-  min-height: 105px;
+  min-height: 85px;
 }
 
 /* Push prices to the same vertical position */
 .cards-grid .price-range {
   margin-top: auto;
 }
+
   /* ── PACKAGES ── */
-  .packages-grid {
+    .packages-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 24px;
@@ -350,19 +351,21 @@
     opacity: 0; transform: translateY(30px);
   }
   .package-card.visible { animation: cardIn 0.5s ease forwards; }
-  .package-card::after {
+  .package-card::before {
     content: '';
-    position: absolute;
-    bottom: -60px; right: -60px;
-    width: 200px; height: 200px;
-    background: radial-gradient(circle, rgba(176,38,255,0.15) 0%, transparent 70%);
-    border-radius: 50%;
-    transition: transform 0.5s ease;
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, var(--neon-purple-faint) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    pointer-events: none;
   }
-  .package-card:hover::after { transform: scale(1.5); }
+  .package-card:hover::before { opacity: 1; }
   .package-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0 40px rgba(176,38,255,0.25), 0 20px 50px rgba(0,0,0,0.5);
+    transform: translateY(-6px);
+    border-color: rgba(176,38,255,0.5);
+    background: radial-gradient(circle, rgba(176,38,255,0.15) 0%, transparent 50%);
+    box-shadow: 0 0 30px rgba(176,38,255,0.2), 0 20px 40px rgba(0,0,0,0.4);
+    transition: transform 0.5s ease;
   }
   .pkg-name {
     font-size: 1.25rem; font-weight: 800;
