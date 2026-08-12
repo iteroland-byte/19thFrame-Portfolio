@@ -162,6 +162,11 @@ body::before{
   color:rgba(176,38,255,.6);
   animation:blink 1.5s ease-in-out infinite;
 }
+.flash.warning{
+  font-size:.65rem;font-weight:500;letter-spacing:2px;
+  color:rgba(176,38,255,.4);
+  margin-top:3px;
+}
 @keyframes blink{0%,100%{opacity:.3}50%{opacity:1}}
 
 /* FLASH overlay */
@@ -837,8 +842,8 @@ footer{
       <div class="camera-lens"><div class="lens-shine"></div></div>
     </div>
     <div class="intro-brand"><span class="w">19th</span><span class="p">Frame</span></div>
-    <div class="shutter-click-text">Click to enter</div>
-    <div class="shutter-click-text"><em>*flash warning*</em></div>
+    <div class="shutter-click-text">CLICK TO ENTER</div>
+    <div class="shutter-click-text flash warning"><em>*flash warning*</em></div>
   </div>
 </div>
 
@@ -1587,8 +1592,6 @@ function triggerShutter(){
 
 // Click anywhere on intro
 intro.addEventListener('click', triggerShutter);
-// Auto-fire after 4s if user doesn't click
-setTimeout(triggerShutter, 4000);
 
 /* ══════════════ SCROLL REVEALS ══════════════ */
 const revealObs=new IntersectionObserver(entries=>{
