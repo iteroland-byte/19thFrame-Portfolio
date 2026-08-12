@@ -989,7 +989,7 @@ footer{
         </div>
       </div>
       <div class="category-card" data-category="logos">
-        <img class="category-cover" src="Ofada space 1.png" alt="Logos" loading="lazy">
+        <img class="category-cover" src="Ofada Space food logo.png" alt="Logos" loading="lazy">
         <div class="category-overlay">
           <div class="category-title">Logos</div>
         </div>
@@ -1051,7 +1051,7 @@ footer{
       </div>
 
       <div class="work-card" data-cat="dinovate"
-           data-type="video" data-src="Mark you Calendar!.mp4"
+           data-type="video" data-src="Mark your Calendar!.mp4"
            data-title="DCA Countdown"
            data-desc="Snappy countdown for Dinovate Creative Academy.">
         <video class="work-media" src="Mark your Calendar!.mp4" poster="Mark your Calendar!.jpg" muted preload="metadata"></video>
@@ -1639,7 +1639,6 @@ workBackBtn.addEventListener('click',showCategoryList);
 // Start with every work-card hidden until a category is chosen
 document.querySelectorAll('.work-card').forEach(card=>card.classList.add('hidden'));
 
-```js
 /* ══════════════ LIGHTBOX ══════════════ */
 const lightbox = document.getElementById('lightbox');
 const lbVideo = document.getElementById('lightbox-media');
@@ -1800,7 +1799,6 @@ function nextWork(){
 
   currentCardIndex++;
 
-  // Loop back to first project
   if(currentCardIndex >= cards.length){
     currentCardIndex = 0;
   }
@@ -1819,7 +1817,6 @@ function previousWork(){
 
   currentCardIndex--;
 
-  // Loop to last project
   if(currentCardIndex < 0){
     currentCardIndex = cards.length - 1;
   }
@@ -1834,10 +1831,6 @@ document.querySelectorAll('.work-card').forEach(card => {
 
   card.addEventListener('click', e => {
 
-    /*
-      If clicking an image already inside the lightbox,
-      don't reopen the project.
-    */
     if(e.target === lbImg || e.target === lbVideo){
       return;
     }
@@ -1891,37 +1884,24 @@ lightbox.addEventListener('click', e => {
 
 document.addEventListener('keydown', e => {
 
-  // Only work while lightbox is open
   if(!lightbox.classList.contains('open')) return;
 
-
-  // ESC = close
   if(e.key === 'Escape'){
-
     e.preventDefault();
     closeLightbox();
     return;
-
   }
 
-
-  // RIGHT ARROW = NEXT PROJECT
   if(e.key === 'ArrowRight'){
-
     e.preventDefault();
     nextWork();
     return;
-
   }
 
-
-  // LEFT ARROW = PREVIOUS PROJECT
   if(e.key === 'ArrowLeft'){
-
     e.preventDefault();
     previousWork();
     return;
-
   }
 
 });
@@ -1949,37 +1929,18 @@ lightbox.addEventListener('touchend', e => {
   const deltaX = touchEndX - touchStartX;
   const deltaY = touchEndY - touchStartY;
 
-  // Minimum distance required for a swipe
   const minSwipeDistance = 60;
 
-  // Ignore short movements
   if(Math.abs(deltaX) < minSwipeDistance) return;
-
-  // Ignore mostly vertical movements
   if(Math.abs(deltaX) < Math.abs(deltaY)) return;
 
-
-  /*
-    SWIPE LEFT = NEXT PROJECT
-  */
   if(deltaX < 0){
-
     nextWork();
-
-  }
-
-
-  /*
-    SWIPE RIGHT = PREVIOUS PROJECT
-  */
-  else{
-
+  }else{
     previousWork();
-
   }
 
 }, { passive: true });
-```
 
 /* ══════════════ VIDEO HOVER PREVIEW ══════════════ */
 document.querySelectorAll('.work-card[data-type="video"]').forEach(card=>{
