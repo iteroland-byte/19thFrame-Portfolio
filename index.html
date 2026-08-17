@@ -1514,7 +1514,7 @@ function playShutterSound(){
     const clickSrc = ac.createBufferSource();
     clickSrc.buffer = clickBuf;
     const clickGain = ac.createGain();
-    clickGain.gain.setValueAtTime(3, ac.currentTime);
+    clickGain.gain.setValueAtTime(2, ac.currentTime);
     clickGain.gain.exponentialRampToValueAtTime(0.001, ac.currentTime + 0.04);
     // High-pass to make it crisp
     const hp = ac.createBiquadFilter();
@@ -1531,7 +1531,7 @@ function playShutterSound(){
     const thudSrc = ac.createBufferSource();
     thudSrc.buffer = thudBuf;
     const thudGain = ac.createGain();
-    thudGain.gain.setValueAtTime(1.5, ac.currentTime + 0.01);
+    thudGain.gain.setValueAtTime(0.5, ac.currentTime + 0.01);
     thudGain.gain.exponentialRampToValueAtTime(0.001, ac.currentTime + 0.13);
     // Low-pass for the thud feel
     const lp = ac.createBiquadFilter();
